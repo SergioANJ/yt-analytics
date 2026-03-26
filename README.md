@@ -28,6 +28,8 @@ yt_analytics/
 ├── pdfs/                     ← PDFs por cuenta: pdfs/{id_cuenta}/*.pdf
 ├── client_secret.json        ← Credenciales OAuth de Google Cloud
 ├── .env                      ← OPENAI_API_KEY (no subir a git)
+├──.env.local                 ← Entorno local, donde se almacena credenciales de base de datos local
+├──.env.production            ← Entorno produccion, donde se almacena credenciales de base de datos en produccion
 ├── requirements.txt
 └── README.md
 ```
@@ -116,6 +118,9 @@ python -m pipeline.run --grupo sony --start 2025-01-01 --end 2025-03-31
 
 # Subcuenta específica (igual que antes)
 python -m pipeline.run --subcuenta "Al Rojo Vivo"
+
+#Para subir a producción datos:
+$env:ENV="production"; python -m pipeline.run --grupo sony --start 2025-01-01 --end 2025-03-31
 ```
 
 El pipeline:
@@ -240,3 +245,53 @@ LLM_ENABLED = False   # en config/settings.py
 ```
 
 El dashboard funciona perfectamente sin el chatbot activado.
+
+##  10. Comandos para súbir a Github
+
+```
+#Siempre trabajar en dev
+git checkot dev
+# Haces los cambios en los archivos (components.py, app.py, queries.py...) y Pruebas en local
+streamlit run dashboard/app.py
+# Verifica que todo se ve bien en http://localhost:8501
+
+# Cuando está listo
+git add .
+git commit -m "Mejora diseño top videos"
+git push origin dev
+
+# Subir a producción
+git checkout main
+git merge dev
+git push origin main        # Railway redeploya automático en ~2 min
+git checkout dev            # vuelves a dev
+
+#Para conocer en que rama nos encontramps
+git branch #siempre apunta a la rama con el *
+```
+
+### A. Para hacer descargar en base de datos local
+
+```
+python -m pipeline.run --grupo sony --start 2025-01-01 --end 2025-01-31
+
+```
+
+
+### B. Para cargar datos a producción
+
+```
+$env:ENV="production"; python -m pipeline.run --grupo sony --start 2025-01-01 --end 2025-03-31
+
+```
+Esto hace que connection.py cargue .env.production que apunta a Railway.
+
+### C. Flujo recomendado para cargar datos:
+```
+# 1. Primero prueba contra BD local
+python -m pipeline.run --grupo sony --start 2025-01-01 --end 2025-01-31
+
+# 2. Si funciona bien, carga a producción
+ENV=production python -m pipeline.run --grupo sony --start 2025-01-01 --end 2025-03-31
+
+```
