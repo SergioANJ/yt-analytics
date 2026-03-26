@@ -138,13 +138,13 @@ Abre `http://localhost:8501` en el navegador.
 
 | Usuario       | Contraseña | Cuenta        |
 |---------------|-----------|---------------|
-| telemundo     | 3816      | TELEMUNDO     |
-| sony          | 2358      | SONY          |
-| magic         | 1688      | MAGIC         |
-| andreslpz     | 7865      | ANDRES LOPEZ  |
-| amigosasueldo | 9834      | AMIGOS A SUELDO |
-| lauracuna     | 8963      | LAURA ACUÑA   |
-| andrnvrro     | 9437      | ANDREA NAVARRO |
+| telemundo     | ****      | TELEMUNDO     |
+| sony          | ****      | SONY          |
+| magic         | ****      | MAGIC         |
+| andreslpz     | ****      | ANDRES LOPEZ  |
+| amigosasueldo | ****      | AMIGOS A SUELDO |
+| lauracuna     | ****      | LAURA ACUÑA   |
+| andrnvrro     | ****      | ANDREA NAVARRO |
 
 > ⚠️ Las contraseñas están en texto plano para facilitar el desarrollo.
 > En producción, usar bcrypt u otro hash.
