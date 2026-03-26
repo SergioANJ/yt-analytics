@@ -1,0 +1,21 @@
+# requirements.txt
+# Instalar con: pip install -r requirements.txt
+
+streamlit>=1.35.0
+pandas>=2.0.0
+sqlalchemy>=2.0.0
+psycopg2-binary>=2.9.0
+plotly>=5.20.0
+google-auth>=2.29.0
+google-auth-oauthlib>=1.2.0
+google-api-python-client>=2.130.0
+python-dotenv>=1.0.0
+
+# ── Módulo LLM / Chatbot (opcional) ───────────────────────
+# Solo necesario si LLM_ENABLED = True en config/settings.py
+openai>=1.30.0
+langchain>=0.2.0
+langchain-openai>=0.1.0
+langchain-community>=0.2.0
+faiss-cpu>=1.8.0
+pypdf>=4.0.0
